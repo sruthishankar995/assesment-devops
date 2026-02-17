@@ -1,0 +1,91 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36" version="29.4.0">
+  <diagram name="AWS Production Architecture (Icon Styled)" id="0">
+    <mxGraphModel dx="1892" dy="1288" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1000" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="internet" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#1E88E5;fontSize=14;fontStyle=1;" value="🌐 Internet Users" vertex="1">
+          <mxGeometry height="70" width="160" x="50" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="route53" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FF9900;strokeColor=#232F3E;fontColor=#ffffff;fontStyle=1;" value="🧭 Amazon Route53" vertex="1">
+          <mxGeometry height="70" width="200" x="250" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="cloudfront" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FF9900;strokeColor=#232F3E;fontColor=#ffffff;fontStyle=1;" value="⚡ Amazon CloudFront" vertex="1">
+          <mxGeometry height="70" width="220" x="500" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="alb" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FF9900;strokeColor=#232F3E;fontColor=#ffffff;fontStyle=1;" value="🔀 Application Load Balancer" vertex="1">
+          <mxGeometry height="70" width="260" x="780" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="vpc" parent="1" style="swimlane;whiteSpace=wrap;html=1;fillColor=#F3E5F5;strokeColor=#6A1B9A;fontStyle=1;" value="Amazon VPC" vertex="1">
+          <mxGeometry height="600" width="1200" x="200" y="250" as="geometry" />
+        </mxCell>
+        <mxCell id="public" parent="vpc" style="swimlane;whiteSpace=wrap;html=1;fillColor=#FCE4EC;" value="Public Subnets (Multi-AZ)" vertex="1">
+          <mxGeometry height="150" width="1140" x="30" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="private_app" parent="vpc" style="swimlane;whiteSpace=wrap;html=1;fillColor=#E8F5E9;" value="Private Subnets - EKS (Multi-AZ)" vertex="1">
+          <mxGeometry height="220" width="1140" x="30" y="220" as="geometry" />
+        </mxCell>
+        <mxCell id="eks" parent="private_app" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1E88E5;fontColor=#ffffff;fontStyle=1;" value="☸ Amazon EKS Cluster" vertex="1">
+          <mxGeometry height="80" width="280" x="80" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="blue" parent="private_app" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#90CAF9;fontStyle=1;" value="🔵 Backend (Blue)" vertex="1">
+          <mxGeometry height="70" width="200" x="450" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="green" parent="private_app" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#A5D6A7;fontStyle=1;" value="🟢 Backend (Green)" vertex="1">
+          <mxGeometry height="70" width="200" x="700" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="worker" parent="private_app" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE082;fontStyle=1;" value="⚙ Worker Pods (SQS Consumers)" vertex="1">
+          <mxGeometry height="70" width="300" x="550" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="private_db" parent="vpc" style="swimlane;whiteSpace=wrap;html=1;fillColor=#FFF3E0;" value="Private Subnets - RDS (Multi-AZ)" vertex="1">
+          <mxGeometry height="100" width="1140" x="30" y="470" as="geometry" />
+        </mxCell>
+        <mxCell id="aurora" parent="private_db" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FB8C00;fontColor=#ffffff;fontStyle=1;" value="🗄 Amazon Aurora PostgreSQL (Primary + Replica)" vertex="1">
+          <mxGeometry height="70" width="450" x="350" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="sqs" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFB74D;fontStyle=1;" value="📬 Amazon SQS" vertex="1">
+          <mxGeometry height="80" width="220" x="1500" y="380" as="geometry" />
+        </mxCell>
+        <mxCell id="ecr" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFB74D;fontStyle=1;" value="📦 Amazon ECR" vertex="1">
+          <mxGeometry height="80" width="220" x="1500" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="obs" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#B0BEC5;fontStyle=1;" value="📊 CloudWatch + AMP + X-Ray" vertex="1">
+          <mxGeometry height="90" width="280" x="1500" y="550" as="geometry" />
+        </mxCell>
+        <mxCell id="gha" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#24292E;fontColor=#ffffff;fontStyle=1;" value="🚀 GitHub Actions CI/CD" vertex="1">
+          <mxGeometry height="90" width="280" x="50" y="600" as="geometry" />
+        </mxCell>
+        <mxCell id="7FoxjiMMbi7IHamUX-a7-1" edge="1" parent="1" source="internet" style="endArrow=block;" target="route53">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="7FoxjiMMbi7IHamUX-a7-2" edge="1" parent="1" source="route53" style="endArrow=block;" target="cloudfront">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="7FoxjiMMbi7IHamUX-a7-3" edge="1" parent="1" source="cloudfront" style="endArrow=block;" target="alb">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="7FoxjiMMbi7IHamUX-a7-4" edge="1" parent="1" source="alb" style="endArrow=block;" target="eks">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="7FoxjiMMbi7IHamUX-a7-5" edge="1" parent="1" source="eks" style="endArrow=block;" target="aurora">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="7FoxjiMMbi7IHamUX-a7-6" edge="1" parent="1" source="eks" style="endArrow=block;" target="sqs">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="7FoxjiMMbi7IHamUX-a7-7" edge="1" parent="1" source="sqs" style="endArrow=block;" target="worker">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="7FoxjiMMbi7IHamUX-a7-8" edge="1" parent="1" source="gha" style="endArrow=block;" target="ecr">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="7FoxjiMMbi7IHamUX-a7-9" edge="1" parent="1" source="ecr" style="endArrow=block;" target="eks">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="7FoxjiMMbi7IHamUX-a7-10" edge="1" parent="1" source="eks" style="endArrow=block;" target="obs">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
