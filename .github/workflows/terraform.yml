@@ -1,0 +1,32 @@
+name: Terraform
+
+on:
+  push:
+    paths:
+      - "terraform/**"
+    branches: [ "main" ]
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: terraform/environments/dev
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+          aws-region: us-east-1
+
+      - uses: hashicorp/setup-terraform@v3
+
+      - run: terraform init
+      - run: terraform validate
+      - run: terraform plan -out=tfplan
+
+      - if: github.ref == 'refs/heads/main'
+        run: terraform apply -auto-approve tfplan
