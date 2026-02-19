@@ -1,42 +1,4 @@
-📌 Context
-
-This repository represents a modernization plan for an existing startup application stack.
-
-"Current State"
-
-Single monolithic repository
-
-React frontend
-
-Python backend
-
-Bash deployment scripts
-
-Runs on EC2 instances in AWS
-
-Uses PostgreSQL RDS
-
-Uses S3 for object storage
-
-Manual deployments via SSH
-
-No CI/CD
-
-No Infrastructure as Code
-
-No centralized logging
-
-Minimal monitoring via AWS console dashboards
-
-Load spikes cause:
-
-High memory usage → swap thrashing
-
-Database overload due to bulk writes
-
-Slowdowns and occasional downtime
-
-🎯 Goals (6–12 Month Plan)
+Goals (6–12 Month Plan) :
 
 Eliminate manual deployments
 
@@ -52,7 +14,7 @@ Improve observability
 
 Support future growth
 
-🏗 Target Architecture
+ Target Architecture
                 Route53
                    │
               CloudFront
@@ -74,7 +36,8 @@ Support future growth
                                ▼
                                S3
 
-🧱 Technology Choices
+Technology Choices: 
+
 Container Orchestration: Amazon EKS
 
 Why Kubernetes (EKS) instead of ECS?
@@ -91,7 +54,8 @@ Advanced deployment strategies (Blue/Green, Canary)
 
 EKS provides long-term scalability and flexibility for a growing startup.
 
-🗺 Migration Plan (Minimizing Downtime)
+Migration Plan (Minimizing Downtime)
+
 Phase 1 (Months 0–3): Stabilization & Foundations
 
 Highest Priority
@@ -140,7 +104,7 @@ Add Redis caching
 
 Implement advanced observability
 
-⚡ Handling Load Spikes
+ Handling Load Spikes
 Current Problem
 
 Large client jobs:
@@ -174,8 +138,9 @@ Controlled database load
 
 No memory thrashing in API pods
 
-🗄 Database Scalability Strategy
-1️⃣ Migrate to Aurora PostgreSQL
+ Database Scalability Strategy:
+
+1. Migrate to Aurora PostgreSQL
 
 Benefits:
 
@@ -187,14 +152,14 @@ Read replicas
 
 Faster failover
 
-2️⃣ Read Replicas
+2. Read Replicas
 Writes → Primary
 Reads → Replica
 
 
 Reduces primary database load.
 
-3️⃣ Bulk Insert Optimization
+3. Bulk Insert Optimization
 
 Use batch inserts
 
@@ -204,7 +169,7 @@ Optimize autovacuum
 
 Partition large tables
 
-4️⃣ Connection Pooling
+4. Connection Pooling
 
 Introduce:
 
@@ -249,7 +214,7 @@ High 5xx errors
 
 SQS queue backlog
 
-🔄 CI/CD Modernization
+CI/CD Modernization:
 
 Replace manual SSH deployments with GitHub Actions:
 
@@ -277,7 +242,7 @@ Safer rollouts
 
 Faster iteration
 
-🔐 Security Improvements
+Security Improvements: 
 
 IAM Roles for Service Accounts
 
@@ -292,7 +257,7 @@ WAF in front of ALB
 VPC Endpoints for S3
 
 
-📈 What Gets Done First
+What Gets Done First: 
 First 3 Months
 
 CI/CD
@@ -329,7 +294,7 @@ Cost optimization
 
 Disaster recovery planning
 
-🏁 Conclusion
+ Conclusion :
 
 This roadmap:
 
@@ -365,10 +330,10 @@ Risk assessment
 
 Author: DevOps Architecture Proposal
 Timeline: 6–12 Months
-Objective: Build scalable, reliable, production-grade infrastructure for rapid growth 🚀
+Objective: Build scalable, reliable, production-grade infrastructure for rapid growth 
 
-🚀 How to Run
-1️⃣ Prerequisites
+How to Run
+1. Prerequisites
 
 AWS account
 
@@ -388,7 +353,7 @@ terraform init
 terraform plan
 terraform apply
 
-🧠 Assumptions Made
+ Assumptions Made
 
 1.Due to time constraints, the following assumptions were made:
 
